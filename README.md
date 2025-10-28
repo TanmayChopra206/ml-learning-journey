@@ -1,6 +1,6 @@
 # My Machine Learning Journey 🚀
 
-I'm learning machine learning step by step and documenting everything here.
+I am learning machine learning step by step and documenting everything here.
 
 ## Structure
 - **notebooks/**: Hands-on experiments and algorithms
