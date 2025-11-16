@@ -1,0 +1,149 @@
+\documentclass{article}
+
+\input{preamble}
+
+\title{Summative-1 coursework (ST310; 2025 AT, Week 1-7)}
+\date{}
+\author{\textcolor{red}{Substitute your candidate ID here.}}
+
+\begin{document}
+\maketitle
+
+
+\textcolor{red}{Substitute your solutions below.}
+\begin{enumerate}
+    \item Invariance:
+    
+    We want to prove that $\|\b{UAV}^\top\|_F = \|\b{A}\|_F$ for all $\b{U} \in O(c)$ and $\b{V} \in O(d)$.
+    
+    \textbf{Proof:}
+    
+    
+    By definition, the Frobenius norm is:
+    $$\|\b{A}\|_F = \sqrt{\sum_{i \in [c], j \in [d]} A_{i,j}^2}$$
+    
+    We can rewrite this as:
+    $$\|\b{A}\|_F^2 = \sum_{i=1}^c \sum_{j=1}^d A_{i,j}^2 = \text{tr}(\b{A}^\top \b{A})$$
+    
+    This follows because the $(j,j)$-th diagonal entry of $\b{A}^\top \b{A}$ is:
+    $$(\b{A}^\top \b{A})_{j,j} = \sum_{i=1}^c A_{i,j}^2$$
+    
+    and the trace sums all diagonal entries.
+    
+    
+    Using the trace formulation:
+    \begin{align*}
+    \|\b{UAV}^\top\|_F^2 &= \text{tr}\left((\b{UAV}^\top)^\top (\b{UAV}^\top)\right)\\
+    &= \text{tr}\left(\b{VA}^\top \b{U}^\top \b{UAV}^\top\right)
+    \end{align*}
+    
+ 
+    
+    Since $\b{U} \in O(c)$, we have $\b{U}^\top \b{U} = \b{I}_c$. Therefore:
+    $$\|\b{UAV}^\top\|_F^2 = \text{tr}\left(\b{VA}^\top \b{AV}^\top\right)$$
+    
+   
+    
+    The trace satisfies $\text{tr}(\b{XYZ}) = \text{tr}(\b{ZXY})$. Applying this:
+    $$\text{tr}\left(\b{VA}^\top \b{AV}^\top\right) = \text{tr}\left(\b{V}^\top \b{VA}^\top \b{A}\right)$$
+    
+    
+    Since $\b{V} \in O(d)$, we have $\b{V}^\top \b{V} = \b{I}_d$. Therefore:
+    $$\text{tr}\left(\b{V}^\top \b{VA}^\top \b{A}\right) = \text{tr}\left(\b{A}^\top \b{A}\right) = \|\b{A}\|_F^2$$
+    
+    \textit{Conclusion:}
+    
+    We have shown that $\|\b{UAV}^\top\|_F^2 = \|\b{A}\|_F^2$, which implies:
+    $$\|\b{UAV}^\top\|_F = \|\b{A}\|_F$$
+    
+    This completes the proof. The Frobenius norm is orthogonally invariant because orthogonal matrices preserve the trace of $\b{A}^\top \b{A}$. \qed
+    
+    \item Characteristic polynomials:
+    \item Penalized linear regression:
+    \item (Pseudo)-inverse:
+    
+    We are given two matrices:
+    $$\b{A} = \begin{bmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 2 & 0 & 0\\
+    0 & 0 & -4 & 0\\
+    0 & 0 & 0 & 0
+    \end{bmatrix} \in \mathbb{R}^{4 \times 4}, \qquad
+    \b{B} = \begin{bmatrix}
+    1 & 1\\
+    0 & 2\\
+    0 & 0
+    \end{bmatrix} \in \mathbb{R}^{3 \times 2}$$
+    
+            \begin{itemize}
+                    \item \textbf{Pseudo-inverse of $\b{A}$:}
+                    
+                    Matrix $\b{A}$ is diagonal with three non-zero entries. For a diagonal matrix, the Moore-Penrose pseudo-inverse is obtained by inverting the non-zero diagonal elements and transposing if necessary.
+                    
+                    Since $\b{A}$ is square and diagonal, we simply invert the non-zero entries:
+                    $$\b{A}^+ = \begin{bmatrix}
+                    1 & 0 & 0 & 0\\
+                    0 & 1/2 & 0 & 0\\
+                    0 & 0 & -1/4 & 0\\
+                    0 & 0 & 0 & 0
+                    \end{bmatrix}$$
+                    
+                    We can verify this satisfies the Moore-Penrose conditions: $\b{AA}^+\b{A} = \b{A}$, $\b{A}^+\b{AA}^+ = \b{A}^+$, and both $\b{AA}^+$ and $\b{A}^+\b{A}$ are symmetric.
+                    
+                    \item \textbf{Pseudo-inverse of $\b{B}$:}
+                    
+                    Matrix $\b{B}$ is $3 \times 2$ with full column rank (the two columns are linearly independent). For a full column rank matrix, the pseudo-inverse is given by:
+                    $$\b{B}^+ = (\b{B}^\top \b{B})^{-1}\b{B}^\top$$
+                    
+                    First, compute $\b{B}^\top \b{B}$:
+                    $$\b{B}^\top \b{B} = \begin{bmatrix} 1 & 0 & 0\\ 1 & 2 & 0 \end{bmatrix}
+                    \begin{bmatrix} 1 & 1\\ 0 & 2\\ 0 & 0 \end{bmatrix}
+                    = \begin{bmatrix} 1 & 1\\ 1 & 5 \end{bmatrix}$$
+                    
+                    Now find $(\b{B}^\top \b{B})^{-1}$. The determinant is $\det(\b{B}^\top \b{B}) = 1(5) - 1(1) = 4$, so:
+                    $$(\b{B}^\top \b{B})^{-1} = \frac{1}{4}\begin{bmatrix} 5 & -1\\ -1 & 1 \end{bmatrix}$$
+                    
+                    Finally:
+                    \begin{align*}
+                    \b{B}^+ &= (\b{B}^\top \b{B})^{-1}\b{B}^\top\\
+                    &= \frac{1}{4}\begin{bmatrix} 5 & -1\\ -1 & 1 \end{bmatrix}
+                    \begin{bmatrix} 1 & 0 & 0\\ 1 & 2 & 0 \end{bmatrix}\\
+                    &= \frac{1}{4}\begin{bmatrix} 4 & -2 & 0\\ 0 & 2 & 0 \end{bmatrix}\\
+                    &= \begin{bmatrix} 1 & -1/2 & 0\\ 0 & 1/2 & 0 \end{bmatrix}
+                    \end{align*}
+                    
+                    \item \textbf{Inverse of $\b{B}$:}
+                    
+                    Matrix $\b{B}$ is $3 \times 2$, which means it is not a square matrix. Only square matrices can have an inverse in the traditional sense. Therefore, $\b{B}$ does not have an inverse.
+                    
+                    However, $\b{B}$ does have a pseudo-inverse (computed above), which serves as a generalization of the inverse for non-square matrices and is useful in solving least-squares problems.
+            \end{itemize}
+    \item Rotations:
+    \item Low-rank approximation:
+    \item Logistic function:
+
+     We need to find $h$ such that $L'(z) = h(L(z))$, where $L(z) = \frac{e^z}{1+e^z}$.
+    
+    \textbf{Solution:}
+    
+    First, we compute the derivative of $L(z)$ using the quotient rule:
+    $$L'(z) = \frac{d}{dz}\left(\frac{e^z}{1+e^z}\right) = \frac{e^z(1+e^z) - e^z \cdot e^z}{(1+e^z)^2} = \frac{e^z + e^{2z} - e^{2z}}{(1+e^z)^2} = \frac{e^z}{(1+e^z)^2}$$
+    
+    Now we express this derivative in terms of $L(z)$. We observe that:
+    $$1 - L(z) = 1 - \frac{e^z}{1+e^z} = \frac{1+e^z - e^z}{1+e^z} = \frac{1}{1+e^z}$$
+    
+    Therefore, we can rewrite $L'(z)$ as:
+    $$L'(z) = \frac{e^z}{(1+e^z)^2} = \frac{e^z}{1+e^z} \cdot \frac{1}{1+e^z} = L(z) \cdot (1-L(z))$$
+    
+    Thus, we have shown that:
+    $$L'(z) = L(z)(1-L(z))$$
+    
+    Therefore, $h(u) = u(1-u)$.
+    
+    This elegant property makes the logistic function particularly convenient for gradient-based optimization in machine learning, as the derivative is simply a quadratic function of the function value itself.
+    
+    \item Symmetric difference of sets with 'area':
+    \item A W7 task:
+\end{enumerate}
+
+\end{document}
